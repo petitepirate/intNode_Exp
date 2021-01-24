@@ -1,0 +1,68 @@
+Runs on local host 3000
+
+Using Insomnia
+
+Get request http://localhost:3000/users
+returns all users
+looks like: 
+[
+  {
+    "id": 1,
+    "name": "Juanita",
+    "type": "admin"
+  },
+  {
+    "id": 2,
+    "name": "Jenny",
+    "type": "staff"
+  },
+  {
+    "id": 3,
+    "name": "Jeff",
+    "type": "user"
+  }
+]
+
+____________________________________________________________________
+
+Query by type
+Get Request http://localhost:3000/users/search
+Query add perameter:  type   admin
+returns admin users
+looks like:
+[
+  {
+    "id": 1,
+    "name": "Juanita",
+    "type": "admin"
+  }
+]
+_____________________________________________________________________
+
+Create a user
+Post request http://localhost:3000/users
+include json
+{
+	"name": "Jellybean",
+	"type": "staff"
+}
+_____________________________________________________________________
+
+Patch a user
+Patch to http://localhost:3000/users/4
+include json
+{
+	"name": "Jellybean",
+	"type": "user"
+}
+
+will change Jellybean from staff to user
+______________________________________________________________________
+Delete a user
+Delete request to http://localhost:3000/users/4
+
+Returns "Deleted"
+
+_______________________________________________________________________
+
+Tests run with Jest
