@@ -1,0 +1,17 @@
+Springboard 35.3 Demo
+
+Insomnia
+
+Get request http://localhost:3000/cats gets all cats
+
+
+
+Add A cat:
+Post http://localhost:3000/cats
+
+  {
+    "name": "Rar",
+		"age": 3
+  }
+
+  

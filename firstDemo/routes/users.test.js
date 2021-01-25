@@ -65,7 +65,7 @@ describe ("PATCH /users/:id", () => {
             user: {id: testUser.id, name: 'BillyBob', type: 'admin'}
         })
     })
-    test("Updates a single user", async () => {
+    test("Responds with 404 for invalid id", async () => {
         const res = await request(app).patch(`/users/0`).send({name: 'BillyBob', type: 'admin'});
         expect(res.statusCode).toBe(404);
         })
