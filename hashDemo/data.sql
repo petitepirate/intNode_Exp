@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS shenanigans;
+DROP DATABASE IF EXISTS express_auth_test;
 
-CREATE DATABASE shenanigans;
+CREATE DATABASE express_auth_test;
 
-\c shenanigans;
+\c express_auth_test;
 
 DROP TABLE IF EXISTS users;
 
