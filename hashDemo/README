@@ -1,0 +1,14 @@
+post message to /register
+{
+    "username": "whatever",
+    "password": "mypassword"
+}
+
+same for /login
+
+
+
+get request to /private
+{
+    "_token": "paste token from login route"
+}
