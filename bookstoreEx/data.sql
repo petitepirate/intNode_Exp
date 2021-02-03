@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS books;
+DROP DATABASE IF EXISTS "books-test";
 
-CREATE DATABASE books;
+CREATE DATABASE "books-test";
 
-\c books;
+\c "books-test";
 
 DROP TABLE IF EXISTS books;
 

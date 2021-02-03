@@ -1,6 +1,8 @@
-const express = require("express");
-const Book = require("../models/book");
-
+const express = require('express');
+const Book = require('../models/book');
+const jsonschema = require('jsonschema');
+const bookSchema = require('../schemas/bookSchema.json');
+const ExpressError = require('../expressError');
 const router = new express.Router();
 
 
@@ -27,27 +29,42 @@ router.get("/:id", async function (req, res, next) {
 });
 
 /** POST /   bookData => {book: newBook}  */
-
-router.post("/", async function (req, res, next) {
-  try {
-    const book = await Book.create(req.body);
-    return res.status(201).json({ book });
-  } catch (err) {
-    return next(err);
-  }
+router.post('/', async function(req, res, next) {
+	try {
+        //validation
+		const result = jsonschema.validate(req.body, bookSchema);
+		if (!result.valid) {
+            // if not valid, create list of errors
+			const errorList = result.errors.map((e) => e.stack);
+			const error = new ExpressError(errorList, 400);
+			return next(error);
+		}
+		const book = await Book.create(req.body);
+		return res.status(201).json({ book });
+	} catch (err) {
+		return next(err);
+	}
 });
+
 
 /** PUT /[isbn]   bookData => {book: updatedBook}  */
 
-router.put("/:isbn", async function (req, res, next) {
-  try {
-    const book = await Book.update(req.params.isbn, req.body);
-    return res.json({ book });
-  } catch (err) {
-    return next(err);
-  }
+router.put('/:isbn', async function(req, res, next) {
+	try {
+        //validation
+		const result = jsonschema.validate(req.body, bookSchema);
+		if (!result.valid) {
+            // if not valid, create list of errors
+			const errorList = result.errors.map((e) => e.stack);
+			const error = new ExpressError(errorList, 400);
+			return next(error);
+		}
+		const book = await Book.update(req.params.isbn, req.body);
+		return res.json({ book });
+	} catch (err) {
+		return next(err);
+	}
 });
-
 /** DELETE /[isbn]   => {message: "Book deleted"} */
 
 router.delete("/:isbn", async function (req, res, next) {
